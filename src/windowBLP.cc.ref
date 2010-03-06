@@ -1,0 +1,122 @@
+// generated 2006/3/4 20:54:43 MST by bda@localhost.(none)
+// using glademm V2.6.0
+//
+// newer (non customized) versions of this file go to windowBLP.cc_new
+
+// This file is for your program, I won't touch it again!
+
+#include "config.h"
+#include "windowBLP.hh"
+#include <iostream>
+#include "windowBLP_glade.hh"
+#include "listInit.hh"
+
+
+
+using namespace std;
+
+void windowBLP::on_new1_activate()
+{  
+}
+
+void windowBLP::on_open1_activate()
+{  
+}
+
+void windowBLP::on_save1_activate()
+{  
+}
+
+void windowBLP::on_save_as1_activate()
+{  
+}
+
+void windowBLP::on_quit1_activate()
+{  
+}
+
+void windowBLP::on_cut1_activate()
+{  
+}
+
+void windowBLP::on_copy1_activate()
+{  
+}
+
+void windowBLP::on_paste1_activate()
+{  
+}
+
+void windowBLP::on_delete1_activate()
+{  
+}
+
+void windowBLP::on_about1_activate()
+{  
+}
+
+void windowBLP::on_comboboxLogger_changed()
+{  
+  cout << "Logger Changed" << endl;
+}
+
+void windowBLP::on_comboboxBandMode_changed()
+{  
+}
+
+void windowBLP::on_comboboxOperator_changed()
+{  
+  rOpColumns radioOpColumns;
+  cout << "Operator Changed" << endl;
+
+  Gtk::TreeModel::Row row= *comboboxOperator->get_active();
+  //  Gtk::TreeModel::iterator iter = windowBLP->comboboxOperator->get_active();
+  //  if(iter)
+  //  { 
+    //    Gtk::TreeModel::Row row = *iter;
+    //    if(row)
+    //  { 
+      //Get the data for the selected row, using our knowledge of the tree model:
+
+      Glib::ustring name = row[radioOpColumns.name_col_text];
+
+      std::cout <<  " name=" << name << std::endl;
+      //    }
+      //  }
+      //  else
+      //    std::cout << "invalid iter" << std::endl;
+
+}
+
+void windowBLP::on_entryCall_changed()
+{  
+
+}
+
+bool windowBLP::on_entryCall_focus_out_event(GdkEventFocus *ev)
+{  return 0;
+}
+
+bool windowBLP::on_entryConClass_focus_out_event(GdkEventFocus *ev)
+{  return 0;
+}
+
+void windowBLP::on_entrySection_changed()
+{  
+  cout << "Section changed!" << endl;
+}
+
+bool windowBLP::on_entrySection_focus_out_event(GdkEventFocus *ev)
+{  
+  cout << "Update section." << endl;
+  return 0;
+}
+
+void windowBLP::on_ClearQSO()
+{  
+}
+
+void windowBLP::on_SaveQSO()
+{  
+  cout << "Save QSO!" << endl;
+}
