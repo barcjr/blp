@@ -1,0 +1,38 @@
+# Ignore Build Files
+*.o
+src/blp
+
+# Ignore Autotools Files
+Makefile.in
+aclocal.m4
+autom4te.cache/output.0
+autom4te.cache/output.1
+autom4te.cache/requests
+autom4te.cache/traces.0
+autom4te.cache/traces.1
+config.guess
+config.h.in
+config.sub
+configure
+depcomp
+install-sh
+ltmain.sh
+missing
+src/Makefile.in
+
+# Ignore Configure FilesMakefile
+Makefile
+config.h
+config.log
+config.status
+libtool
+src/.deps/blp.Po
+src/.deps/contact.Po
+src/.deps/dam.Po
+src/.deps/dialogAlert.Po
+src/.deps/dialogAlert_glade.Po
+src/.deps/progLog.Po
+src/.deps/windowBLP.Po
+src/.deps/windowBLP_glade.Po
+src/Makefile
+stamp-h1
