@@ -1,3 +1,6 @@
+# Ignore Run Log File
+src/myTestLog.log
+
 # Ignore Build Files
 *.o
 src/blp
