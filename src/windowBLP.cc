@@ -39,7 +39,7 @@ windowBLP::windowBLP(contactManager *thisMan)
 void windowBLP::on_new_operator_activate()
 {  
   std::string command = "gnome-www-browser ";
-  system(command.append(hostname).append("/adduser.php &").c_str());
+  system(command.append(hostname).append("/blp/adduser.php &").c_str());
 }
 
 void windowBLP::on_quit_activate()
@@ -62,13 +62,13 @@ void windowBLP::on_station_activate()
 void windowBLP::on_history_activate()
 { 
   std::string command = "gnome-www-browser ";
-  system(command.append(hostname).append("/history.php &").c_str());
+  system(command.append(hostname).append("/blp/history.php &").c_str());
 }
 
 void windowBLP::on_score_activate()
 {
   std::string command = "gnome-www-browser ";
-  system(command.append(hostname).append("/score.php &").c_str());
+  system(command.append(hostname).append("/blp/score.php &").c_str());
 }
 
 void windowBLP::on_reports_activate()
