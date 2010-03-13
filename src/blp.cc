@@ -28,6 +28,8 @@ int main(int argc, char **argv)
   std::vector<std::string> bmList;
   std::string logFileName="myTestLog.log";
   std::string dbHost = "";
+  std::string dbUser = "root";
+  std::string dbPass = "";
   std::string rigPort = "";
   int rigNumber=-1;
   bool helperMode = 0;
@@ -40,6 +42,10 @@ int main(int argc, char **argv)
 	helperMode = 1;
     else if( strcmp( argv[i], "--host") == 0 )
       dbHost=argv[++i];
+    else if( strcmp( argv[i], "--user") == 0 )
+      dbUser=argv[++i];
+    else if( strcmp( argv[i], "--password") == 0 )
+      dbPass=argv[++i];
     else if( strcmp( argv[i], "--port") == 0 )
       rigPort=argv[++i];
     else if( strcmp( argv[i], "--rig") == 0 )
@@ -53,7 +59,7 @@ int main(int argc, char **argv)
   }
   
   if( displayHelp || rigNumber < 0 || dbHost == "" ) {
-    std::cout << "usage blp [--external] --host hostname [--port port] --rig rigNumber [--log logName]";
+    std::cout << "usage blp [--external] --host hostname [--user username] [--password password] [--port port] --rig rigNumber [--log logName]";
     exit(1);
   }
 
@@ -83,7 +89,7 @@ int main(int argc, char **argv)
   progLog dataLogger(logFileName, LOGALL);
   dataLogger.logData("Program Start", LOGMESSAGES);
 
-  dataAccessMan dam(dbHost, "FieldDay", "root", "", &dataLogger);
+  dataAccessMan dam(dbHost, "FieldDay", dbUser, dbPass, &dataLogger);
   contactManager conMan(&dam);
 
 
