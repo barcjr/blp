@@ -32,15 +32,12 @@ int main(int argc, char **argv)
   std::string dbPass = "";
   std::string rigPort = "";
   int rigNumber=-1;
-  bool helperMode = 0;
   bool displayHelp = 0;
   bool checkFreq = 1;
 
   for(int i = 1; i < argc; ++i) {
     if( strcmp( argv[i], "--help") == 0 )
       displayHelp = 1;
-    else if( strcmp( argv[i], "--external") == 0 )
-	helperMode = 1;
     else if( strcmp( argv[i], "--host") == 0 )
       dbHost=argv[++i];
     else if( strcmp( argv[i], "--user") == 0 )
@@ -60,7 +57,7 @@ int main(int argc, char **argv)
   }
   
   if( displayHelp || dbHost == "" ) {
-    std::cout << "usage blp [--external] --host hostname [--user username] [--password password] [--port port] [--rig rigNumber] [--log logName]";
+    std::cout << "usage blp --host hostname [--user username] [--password password] [--port port] [--rig rigNumber] [--log logName]";
     exit(1);
   }
 
