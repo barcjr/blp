@@ -34,6 +34,7 @@ int main(int argc, char **argv)
   int rigNumber=-1;
   bool helperMode = 0;
   bool displayHelp = 0;
+  bool checkFreq = 1;
 
   for(int i = 1; i < argc; ++i) {
     if( strcmp( argv[i], "--help") == 0 )
@@ -58,9 +59,15 @@ int main(int argc, char **argv)
     }
   }
   
-  if( displayHelp || rigNumber < 0 || dbHost == "" ) {
-    std::cout << "usage blp [--external] --host hostname [--user username] [--password password] [--port port] --rig rigNumber [--log logName]";
+  if( displayHelp || dbHost == "" ) {
+    std::cout << "usage blp [--external] --host hostname [--user username] [--password password] [--port port] [--rig rigNumber] [--log logName]";
     exit(1);
+  }
+
+  if( rigNumber < 0 ) {
+    std::cout << "No rig specified. Disabling band limit checks.";
+    rigNumber = 1;
+    checkFreq = 0; // Disable band limit checks
   }
 
   /*
@@ -90,7 +97,7 @@ int main(int argc, char **argv)
   dataLogger.logData("Program Start", LOGMESSAGES);
 
   dataAccessMan dam(dbHost, "FieldDay", dbUser, dbPass, &dataLogger);
-  contactManager conMan(&dam);
+  contactManager conMan(&dam, checkFreq);
 
 
   windowBLP = new class windowBLP(&conMan);

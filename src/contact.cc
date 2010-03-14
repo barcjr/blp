@@ -38,7 +38,7 @@ bandMode::bandMode(void)
 
 
 
-contactManager::contactManager(dataAccessMan *dam)
+contactManager::contactManager(dataAccessMan *dam, bool _checkFreq)
 {
   myDam=dam;
   myContact.curStation.callSign ="";
@@ -48,6 +48,7 @@ contactManager::contactManager(dataAccessMan *dam)
   myContact.loggingOperator ="";
   myContact.currentFreq=0.0;
   myContact.currentBandMode=&myBandMode;
+  checkFreq = _checkFreq;
   state=0;
 
 }
@@ -165,7 +166,7 @@ void contactManager::setFrequency(double newFreq)
 
 bool contactManager::is_inBand()
 {
-  if(myBandMode.lowerLimit < myContact.currentFreq && myBandMode.upperLimit > myContact.currentFreq) 
+  if( !checkFreq || myBandMode.lowerLimit < myContact.currentFreq && myBandMode.upperLimit > myContact.currentFreq) 
     return true;
   else
     return false;

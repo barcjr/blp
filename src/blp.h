@@ -103,9 +103,10 @@ class contactManager  {
   bandMode myBandMode;
   std::string band_str;
   std::string mode_str;
+  bool checkFreq;
  public:
 
-  contactManager( dataAccessMan *dam);
+  contactManager( dataAccessMan *dam, bool _checkFreq );
   bool partialCallInput(std::vector<std::string>& list, std::string);
   bool partialSectionInput(std::vector<std::string>& list, std::string partialCall);
   void radioOperatorSelected(std::string newOperator);
