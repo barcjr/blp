@@ -1,5 +1,5 @@
 # Ignore Run Log File
-src/myTestLog.log
+myTestLog.log
 
 # Ignore Build Files
 *.o
