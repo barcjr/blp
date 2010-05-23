@@ -1,0 +1,10 @@
+git-core
+libboost1.40-dev
+libmysqlclient-dev
+mysql-client
+libgtkmm-2.4-dev
+libhamlib-dev
+libhamlib-utils
+portmap
+libtool
+autoconf2.13
