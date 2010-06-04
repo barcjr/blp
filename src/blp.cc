@@ -67,21 +67,6 @@ int main(int argc, char **argv)
     checkFreq = 0; // Disable band limit checks
   }
 
-  /*
-  if(argc < 4) {
-    std::cerr << "usage: blp DataBaseHostName RigPort RigNumber [LogFileName]" << std::endl;
-    exit(-1);
-  }
-
-  dbHost=argv[1];
-  rigPort=argv[2];
-  rigNumber=atoi(argv[3]);
-
-  if( argc==5) {
-    logFileName=argv[5];
-  }
-  */
-
 #if defined(ENABLE_NLS)
   bindtextdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR);
   bind_textdomain_codeset(GETTEXT_PACKAGE, "UTF-8");
@@ -162,26 +147,6 @@ int main(int argc, char **argv)
 
   Glib::signal_timeout().connect(sigc::bind(&hamlib_poll , &conMan, theRig), 2000);
 
-  /*  windowBLP->treeviewCalls->set_model(opRefListStore);
-
-  Gtk::TreeModel::Row row = *(opRefListStore->append());
-  row[radioOpColumns.name_col_text] = "Number 1";
-
-  row = *(opRefListStore->append());
-  row[radioOpColumns.name_col_text] = "Number 2";
-
-  row = *(opRefListStore->append());
-  row[radioOpColumns.name_col_text] = "Number 3";
-
-  row = *(opRefListStore->append());
-  row[radioOpColumns.name_col_text] = "Number 4";
-
-  windowBLP->comboboxLogger->pack_start( radioOpColumns.name_col_text);
-  windowBLP->comboboxOperator->pack_start( radioOpColumns.name_col_text);
-  windowBLP->treeviewCalls->append_column("", radioOpColumns.name_col_text);
-
-  */
-
 
   m.run(*windowBLP);
   delete windowBLP;
@@ -195,7 +160,6 @@ bool hamlib_poll(contactManager* theMan, RIG* theRig)
 {
   freq_t l_freq;
   vfo_t l_vfo;
-  //  rig_get_vfo(theRig, &l_vfo);
   rig_get_freq(theRig, RIG_VFO_CURR, &l_freq);
   theMan->setFrequency(l_freq);
   return true;
