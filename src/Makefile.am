@@ -23,6 +23,6 @@ noinst_HEADERS = \
 
 AM_CXXFLAGS = @GTKMM_CFLAGS@ 
 
-blp_LDADD = @LIBS@ @GTKMM_LIBS@ -lmysqlclient -lz -L/usr/lib/mysql -lhamlib
+blp_LDADD = @LIBS@ @GTKMM_LIBS@ -lmysqlclient -lz -L/usr/lib/mysql -lhamlib -lparapin
 
 blp_LDFLAGS = -ggdb
