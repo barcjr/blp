@@ -9,6 +9,7 @@
 #include <gtkmm/main.h>
 #include <glib/gi18n.h>
 #include <hamlib/rig.h>
+#include <pthread.h>
 
 #include "windowBLP.hh"
 #include "dialogAlert.hh"
@@ -18,6 +19,12 @@
 
 windowBLP *windowBLP;
 dialogAlert *dialogAlert;
+
+freq_t hlib_freq;
+pthread_t hlib;
+pthread_mutex_t hlib_mutex = PTHREAD_MUTEX_INITIALIZER;
+pthread_mutex_t hlib_cond_mutex = PTHREAD_MUTEX_INITIALIZER;
+pthread_cond_t hlib_cond = PTHREAD_COND_INITIALIZER;
 
 int main(int argc, char **argv)
 {  
@@ -36,6 +43,7 @@ int main(int argc, char **argv)
   int rigNumber=-1;
   bool displayHelp = 0;
   bool checkFreq = 1;
+  
 
   for(int i = 1; i < argc; ++i) {
     if( strcmp( argv[i], "--help") == 0 )
@@ -63,7 +71,7 @@ int main(int argc, char **argv)
   }
   
   if( displayHelp || dbHost == "" ) {
-    std::cout << "usage blp --host hostname [--user username] [--password password] [--port port] [--rig rigNumber] [--log logName] [--no-lp]";
+    std::cout << "usage blp --host hostname [--user username] [--password password] [--port port] [--rig rigNumber] [--log logName] [--no-lp]\n";
     exit(1);
   }
 
@@ -161,8 +169,11 @@ int main(int argc, char **argv)
     std::cerr << "rig_open failed: " << rigerror(retcode) << std::endl;
     exit(-1);
   }
+  
+  
+  pthread_create(&hlib,NULL,hamlib_poll_thread, (void*) theRig);
 
-  Glib::signal_timeout().connect(sigc::bind(&hamlib_poll , &conMan, theRig), 2000);
+  Glib::signal_timeout().connect(sigc::bind(&hamlib_poll, &conMan), 2000);
 
 
   m.run(*windowBLP);
@@ -170,14 +181,29 @@ int main(int argc, char **argv)
   dam.releaseBandMode();
   rig_close(theRig);
   rig_cleanup(theRig);
-  return 0;
+  exit(0);
 }
 
-bool hamlib_poll(contactManager* theMan, RIG* theRig)
+bool hamlib_poll(contactManager* theMan)
 {
+  pthread_mutex_lock(&hlib_mutex);
+  theMan->setFrequency(hlib_freq);
+  pthread_mutex_unlock(&hlib_mutex);
+  pthread_cond_signal(&hlib_cond);
+  return true;
+}
+
+void *hamlib_poll_thread(void *myPassedRig)
+{
+  RIG* myRig = (RIG*) myPassedRig;
   freq_t l_freq;
   vfo_t l_vfo;
-  rig_get_freq(theRig, RIG_VFO_CURR, &l_freq);
-  theMan->setFrequency(l_freq);
-  return true;
+  pthread_mutex_lock(&hlib_cond_mutex);
+  while(pthread_cond_wait(&hlib_cond,&hlib_cond_mutex) == 0){
+    rig_get_freq(myRig, RIG_VFO_CURR, &l_freq);
+    pthread_mutex_lock(&hlib_mutex);
+    hlib_freq = l_freq;
+    pthread_mutex_unlock(&hlib_mutex);
+  }
+  pthread_mutex_unlock(&hlib_cond_mutex);
 }

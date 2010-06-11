@@ -15,6 +15,7 @@
 #include <vector>
 #include <boost/bind.hpp>
 #include <gtkmm/dialog.h>
+#include <pthread.h>
 
 //defines for log levels
 #define LOGERRORS 0x01
@@ -125,6 +126,7 @@ class contactManager  {
 bool oob_poll(contactManager* theMan, Gtk::Dialog* theDialog);
 
 // Hamlib poll calls
-bool hamlib_poll(contactManager* theMan, RIG* theRig);
+bool hamlib_poll(contactManager* theMan);
+void *hamlib_poll_thread(void *myPassedRig);
 
 #endif
