@@ -31,6 +31,7 @@ int main(int argc, char **argv)
   std::string dbUser = "root";
   std::string dbPass = "";
   std::string rigPort = "";
+  bool useLp = true;
   int rigNumber=-1;
   bool displayHelp = 0;
   bool checkFreq = 1;
@@ -50,6 +51,8 @@ int main(int argc, char **argv)
       rigNumber=atoi(argv[++i]);
     else if( strcmp( argv[i], "--log") == 0 )
       logFileName=argv[++i];
+    else if( strcmp( argv[i], "--no-lp") == 0 )
+      useLp=false;
     else {
       displayHelp = 1;
       break;
@@ -57,7 +60,7 @@ int main(int argc, char **argv)
   }
   
   if( displayHelp || dbHost == "" ) {
-    std::cout << "usage blp --host hostname [--user username] [--password password] [--port port] [--rig rigNumber] [--log logName]";
+    std::cout << "usage blp --host hostname [--user username] [--password password] [--port port] [--rig rigNumber] [--log logName] [--no-lp]";
     exit(1);
   }
 
@@ -66,6 +69,16 @@ int main(int argc, char **argv)
     rigNumber = 1;
     checkFreq = 0; // Disable band limit checks
   }
+
+  // Setup Parapin
+  if( useLp && pin_init_user(LPT1) ) {
+    std::cout << "Could not open lp port. Pass --no-lp to disable.";
+  }
+  pin_output_mode(LP_DATA_PINS);
+
+  uid_t ruid;
+  getresuid(&ruid, NULL, NULL);
+  setuid(ruid);
 
 #if defined(ENABLE_NLS)
   bindtextdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR);

@@ -2,7 +2,7 @@
 #  define _BLP_H
 
 
-
+#include "parapin.h"
 
 #define USE_OLD_FUNCTIONS
 #include <mysql/mysql.h>
@@ -114,6 +114,7 @@ class contactManager  {
   void setFrequency(double newFreq);
   bool is_inBand();
   void bandModeSelected(std::string newBandMode);
+  void switchBPF();
   void callSelected(std::string newCall);
   void classSelected(std::string newClass);
   void sectionSelected(std::string newSection);

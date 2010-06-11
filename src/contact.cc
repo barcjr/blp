@@ -194,6 +194,20 @@ void contactManager::bandModeSelected(std::string newBandMode)
       state= state | HAVE_BAND;
     }
 
+  clear_pin(LP_DATA_PINS);
+  if( myBandMode.band == "160m" ) {
+    set_pin(LP_PIN02);
+  } else if ( myBandMode.band == "80m" ) {
+    set_pin(LP_PIN03);
+  } else if ( myBandMode.band == "40m" ) {
+    set_pin(LP_PIN04);
+  } else if ( myBandMode.band == "20m" ) {
+    set_pin(LP_PIN05);
+  } else if ( myBandMode.band == "15m" ) {
+    set_pin(LP_PIN06);
+  } else if ( myBandMode.band == "10m" ) {
+    set_pin(LP_PIN07);
+  }
 
   updateStatus();
   return;
