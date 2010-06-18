@@ -103,7 +103,7 @@ int main(int argc, char **argv)
   dataLogger.logData("Program Start", LOGMESSAGES);
 
   dataAccessMan dam(dbHost, "FieldDay", dbUser, dbPass, &dataLogger);
-  contactManager conMan(&dam, checkFreq);
+  contactManager conMan(&dam, checkFreq, useLp);
 
 
   windowBLP = new class windowBLP(&conMan);
