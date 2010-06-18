@@ -31,6 +31,7 @@ int main(int argc, char **argv)
   std::string dbUser = "root";
   std::string dbPass = "";
   std::string rigPort = "";
+  int rigRate = 9600;
   bool useLp = true;
   int rigNumber=-1;
   bool displayHelp = 0;
@@ -49,6 +50,8 @@ int main(int argc, char **argv)
       rigPort=argv[++i];
     else if( strcmp( argv[i], "--rig") == 0 )
       rigNumber=atoi(argv[++i]);
+    else if( strcmp( argv[i], "--rate") == 0 )
+      rigRate=atoi(argv[++i]);
     else if( strcmp( argv[i], "--log") == 0 )
       logFileName=argv[++i];
     else if( strcmp( argv[i], "--no-lp") == 0 )
@@ -149,6 +152,7 @@ int main(int argc, char **argv)
   }
 
   strncpy(theRig->state.rigport.pathname, rigPort.c_str(), FILPATHLEN);
+  theRig->state.rigport.parm.serial.rate = rigRate;
 
 
   retcode=rig_open(theRig);
