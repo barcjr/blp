@@ -71,7 +71,7 @@ int main(int argc, char **argv)
   }
   
   if( displayHelp || dbHost == "" ) {
-    std::cout << "usage blp --host hostname [--user username] [--password password] [--port port] [--rig rigNumber] [--log logName] [--no-lp]\n";
+    std::cout << "usage blp --host hostname [--user username] [--password password] [--port port] [--rig rigNumber] [--log logName] [--no-lp] [--rate baud_rate]\n";
     exit(1);
   }
 
