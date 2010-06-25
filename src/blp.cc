@@ -38,7 +38,7 @@ int main(int argc, char **argv)
   std::string dbUser = "root";
   std::string dbPass = "";
   std::string rigPort = "";
-  int rigRate = 9600;
+  int rigRate = 0;
   bool useLp = true;
   int rigNumber=-1;
   bool displayHelp = 0;
@@ -160,7 +160,8 @@ int main(int argc, char **argv)
   }
 
   strncpy(theRig->state.rigport.pathname, rigPort.c_str(), FILPATHLEN);
-  theRig->state.rigport.parm.serial.rate = rigRate;
+  if(rigRate != 0) // Only set baud rate if it was specified on the command line
+    theRig->state.rigport.parm.serial.rate = rigRate;
 
 
   retcode=rig_open(theRig);
