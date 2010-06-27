@@ -27,7 +27,9 @@ while($row= mysql_fetch_array($db_result)) {
         echo "<font color='#009900'>$row[0]</font><br />";
 }
 echo "<br />";
-
+?>
+<div style="float:left;">
+<?php
 $query = "SELECT DISTINCT Section.FullName FROM Contact
 JOIN Station ON (Contact.StationID = Station.StationID)
 JOIN Section ON (Station.SectionID = Section.SectionID)
@@ -46,6 +48,8 @@ while($row = mysql_fetch_array($db_result)) {
 }
 ?>
 </ul>
+</div>
+<div style="float:left; margin-left: 6em;">
 <?php
 $query = "SELECT DISTINCT Section.FullName FROM Section
 WHERE NOT Section.SectionID in
@@ -67,6 +71,6 @@ while($row = mysql_fetch_array($db_result)) {
 }
 ?>
 </ul>
-
+</div>
 </body>
 </html>
