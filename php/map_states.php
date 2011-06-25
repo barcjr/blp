@@ -32,7 +32,14 @@ cvi_map.add($('#usa')[0], {});
 </head> 
  
 <BODY  TEXT='black' LINK='blue' VLINK='blue' ALINK='blue'> 
- 
+
+<div id="title"><b>Map of States</b></div>
+<br>
+
+<?php require('nav.php'); ?>
+
+<br><br>
+
 <CENTER> 
  
 <font face="Comic Sans Ms, Arial"><font size=5> 
