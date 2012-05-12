@@ -16,6 +16,7 @@
 #include <boost/bind.hpp>
 #include <gtkmm/dialog.h>
 #include <pthread.h>
+#include <curl/curl.h>
 
 //defines for log levels
 #define LOGERRORS 0x01
@@ -70,18 +71,16 @@ struct  contact
 
 class dataAccessMan  {
   std::string requestedOperator;
+  CURL *curl;
   int bandModeListCount;
-  std::string	dataHost;
-  std::string	dataBase;
-  std::string	dataUser;
-  std::string	dataPasswd;
-  MYSQL loggingDB;
+//  std::string	dataHost;
   progLog		*logger;
   void logDbError(std::string errorMessage);
   std::string  hostName;
 
  public:
-  dataAccessMan(std::string dataBaseHost, std::string dataBaseName, std::string dataBaseUser, std::string dataBasePasswd, progLog *logObj);
+//  dataAccessMan(std::string dataBaseHost, std::string dataBaseName, std::string dataBaseUser, std::string dataBasePasswd, progLog *logObj);
+  dataAccessMan(std::string ApiUrl);
   bool  getOperatorList(std::vector<std::string>& list);
   bool getBandModeList(std::vector<std::string>& list);
   bool getPartialCalls(std::vector<std::string>& list, std::string partialCall);
