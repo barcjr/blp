@@ -335,16 +335,16 @@ bool dataAccessMan::reserveBandMode(bandMode& thisBandMode)
 	
 void dataAccessMan::releaseBandMode(void)
 {
-  std::string queryText;
-  logger->logData("Release BandMode start", LOGMESSAGES);
-  queryText="Update BandMode set CurrentUser=NULL where CurrentUser=\"" + hostName + "\"" ;
-  logger->logData("bandModeUpdate->" + queryText + "<-", LOGSQL);
-
-  if( (mysql_real_query(&loggingDB, queryText.c_str(), queryText.length())))
-    {
-      logDbError("Error during bandMode Update");
-    }
-  logger->logData("BandMode done", LOGMESSAGES);
+//  std::string queryText;
+//  logger->logData("Release BandMode start", LOGMESSAGES);
+//  queryText="Update BandMode set CurrentUser=NULL where CurrentUser=\"" + hostName + "\"" ;
+//  logger->logData("bandModeUpdate->" + queryText + "<-", LOGSQL);
+//
+//  if( (mysql_real_query(&loggingDB, queryText.c_str(), queryText.length())))
+//    {
+//      logDbError("Error during bandMode Update");
+//    }
+//  logger->logData("BandMode done", LOGMESSAGES);
 	
 }
 
