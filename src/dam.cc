@@ -39,6 +39,7 @@ bool dataAccessMan::getOperatorList(std::vector<std::string>& list)
 	list.push_back("Hargobind K. 2");
 	list.push_back("Hargobind K. 3");
 	list.push_back("Hargobind K. 4");
+	return 1;
 	
 //  MYSQL_RES *res; 		// To be used to fetch information into 
 //  MYSQL_ROW row;
@@ -357,7 +358,7 @@ bool dataAccessMan::reserveBandMode(bandMode& thisBandMode)
 //    }
 //  logger->logData("BandMode is NOT resreved", LOGMESSAGES);
 //  mysql_free_result(res);
-  return(0);
+  return(1);
       
 }
 
@@ -551,6 +552,7 @@ int dataAccessMan::saveQSO(contact *thisContact)
   dumpFile << thisContact->loggingOperator << "\t";
   dumpFile << thisContact->currentBandMode->title << "\t" << frequency << "\n";
   dumpFile.close();
+  return 0;
 }
 
 
