@@ -34,36 +34,42 @@ dataAccessMan::dataAccessMan(std::string ApiUrl)
 
 bool dataAccessMan::getOperatorList(std::vector<std::string>& list)
 {
-  MYSQL_RES *res; 		// To be used to fetch information into 
-  MYSQL_ROW row;
-  std::string operatorText;
-  int i, numRows;
-
-  logger->logData("Filling Operator List", LOGMESSAGES);
-
-  std::string queryText;
-  queryText="Select Name, CallSign from Operator";
-  logger->logData("Operator Query->" + queryText + "<-", LOGSQL);
-
-  if( (mysql_real_query(&loggingDB, queryText.c_str(), queryText.length())))
-    {
-      logDbError("Error duringOperator query");
-      return(0);
-    }
-  res=mysql_store_result(&loggingDB); 	/* Download result from server */
-  numRows=mysql_num_rows(res);
-  for(i=0; i < numRows; i++)
-    {
-      row=mysql_fetch_row(res); 		/* Get a row from the results */
-      operatorText= row[0];
-      operatorText.append(" (");
-      operatorText.append(row[1]);
-      operatorText.append(")");
-      list.push_back(operatorText);
-     }
-  mysql_free_result(res);
-  logger->logData("Operator List Complete", LOGMESSAGES);
-  return 1;
+	list.push_back("Hargobind K. 0");
+	list.push_back("Hargobind K. 1");
+	list.push_back("Hargobind K. 2");
+	list.push_back("Hargobind K. 3");
+	list.push_back("Hargobind K. 4");
+	
+//  MYSQL_RES *res; 		// To be used to fetch information into 
+//  MYSQL_ROW row;
+//  std::string operatorText;
+//  int i, numRows;
+//
+//  logger->logData("Filling Operator List", LOGMESSAGES);
+//
+//  std::string queryText;
+//  queryText="Select Name, CallSign from Operator";
+//  logger->logData("Operator Query->" + queryText + "<-", LOGSQL);
+//
+//  if( (mysql_real_query(&loggingDB, queryText.c_str(), queryText.length())))
+//    {
+//      logDbError("Error duringOperator query");
+//      return(0);
+//    }
+//  res=mysql_store_result(&loggingDB); 	/* Download result from server */
+//  numRows=mysql_num_rows(res);
+//  for(i=0; i < numRows; i++)
+//    {
+//      row=mysql_fetch_row(res); 		/* Get a row from the results */
+//      operatorText= row[0];
+//      operatorText.append(" (");
+//      operatorText.append(row[1]);
+//      operatorText.append(")");
+//      list.push_back(operatorText);
+//     }
+//  mysql_free_result(res);
+//  logger->logData("Operator List Complete", LOGMESSAGES);
+//  return 1;
 }
 
 
