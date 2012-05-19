@@ -26,7 +26,7 @@ $count15 = $row[0];
 $day = date('d');
 $hourInMin = date('H');
 $min = date('i');
-$rate = $count/(((24*($day-27)*60+($hourInMin-12)*60)+$min)/60);
+$rate = $count/(((24*($day-26)*60+($hourInMin-12)*60)+$min)/60);
 $rate15 = $count15*4;
 
 
