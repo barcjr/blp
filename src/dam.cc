@@ -281,52 +281,52 @@ int  dataAccessMan::getStation(std::string call,  radioStation *thisStation)
 
 bool dataAccessMan::reserveBandMode(bandMode& thisBandMode)
 {
-  MYSQL_RES *res; 		// To be used to fetch information into 
-  MYSQL_ROW row;
-  std::string userName;
-
-  logger->logData("Reserving BandMode", LOGMESSAGES);
-
-  std::string queryText;
-  queryText="Select * from BandMode where Title=\"" +  thisBandMode.title + "\"";
-  logger->logData("bandMode Query->" + queryText + "<-", LOGSQL);
-
-  if( (mysql_real_query(&loggingDB, queryText.c_str(), queryText.length())))
-    {
-      logDbError("Error during bandMode query");
-      return(0);
-    }
-  res=mysql_store_result(&loggingDB); 	/* Download result from server */
-  row=mysql_fetch_row(res); 		/* Get a row from the results */
-  if(mysql_num_rows( res) == 0)
-    {
-      logger->logData("No BandMode Found", LOGMESSAGES);	
-      mysql_free_result(res);
-      return 0;
-    }
-
-  thisBandMode.title=row[5];
-  thisBandMode.upperLimit= atof(row[4]);
-  thisBandMode.lowerLimit= atof(row[3]);
-  thisBandMode.mode=row[2];
-  thisBandMode.band=row[1];
-  if(row[6] == '\0')
-    {
-      queryText="Update BandMode set CurrentUser=\"" + hostName + "\" where Title=\"" + thisBandMode.title + "\" limit 1";
-      logger->logData("bandModeUpdate->" + queryText + "<-", LOGSQL);
-
-      if( (mysql_real_query(&loggingDB, queryText.c_str(), queryText.length())))
-	{
-	  logDbError("Error during bandMode Update");
-	  mysql_free_result(res);
-	  return(0);
-	}
-      mysql_free_result(res);
-      logger->logData("BandMode is reserved", LOGMESSAGES);
-      return(1);
-    }
-  logger->logData("BandMode is NOT resreved", LOGMESSAGES);
-  mysql_free_result(res);
+//  MYSQL_RES *res; 		// To be used to fetch information into 
+//  MYSQL_ROW row;
+//  std::string userName;
+//
+//  logger->logData("Reserving BandMode", LOGMESSAGES);
+//
+//  std::string queryText;
+//  queryText="Select * from BandMode where Title=\"" +  thisBandMode.title + "\"";
+//  logger->logData("bandMode Query->" + queryText + "<-", LOGSQL);
+//
+//  if( (mysql_real_query(&loggingDB, queryText.c_str(), queryText.length())))
+//    {
+//      logDbError("Error during bandMode query");
+//      return(0);
+//    }
+//  res=mysql_store_result(&loggingDB); 	/* Download result from server */
+//  row=mysql_fetch_row(res); 		/* Get a row from the results */
+//  if(mysql_num_rows( res) == 0)
+//    {
+//      logger->logData("No BandMode Found", LOGMESSAGES);	
+//      mysql_free_result(res);
+//      return 0;
+//    }
+//
+//  thisBandMode.title=row[5];
+//  thisBandMode.upperLimit= atof(row[4]);
+//  thisBandMode.lowerLimit= atof(row[3]);
+//  thisBandMode.mode=row[2];
+//  thisBandMode.band=row[1];
+//  if(row[6] == '\0')
+//    {
+//      queryText="Update BandMode set CurrentUser=\"" + hostName + "\" where Title=\"" + thisBandMode.title + "\" limit 1";
+//      logger->logData("bandModeUpdate->" + queryText + "<-", LOGSQL);
+//
+//      if( (mysql_real_query(&loggingDB, queryText.c_str(), queryText.length())))
+//	{
+//	  logDbError("Error during bandMode Update");
+//	  mysql_free_result(res);
+//	  return(0);
+//	}
+//      mysql_free_result(res);
+//      logger->logData("BandMode is reserved", LOGMESSAGES);
+//      return(1);
+//    }
+//  logger->logData("BandMode is NOT resreved", LOGMESSAGES);
+//  mysql_free_result(res);
   return(0);
       
 }
