@@ -74,32 +74,56 @@ bool dataAccessMan::getOperatorList(std::vector<std::string>& list)
 
 bool dataAccessMan::getBandModeList(std::vector<std::string>& list)
 {
-  MYSQL_RES *res; 		// To be used to fetch information into 
-  MYSQL_ROW row;
-  std::string bandModeText;
-  int i, numRows;
-
-  logger->logData("Filling BandMode List", LOGMESSAGES);
-
-  std::string queryText;
-  queryText="Select Title from BandMode";
-  logger->logData("BandModeList Query->" + queryText + "<-", LOGSQL);
-
-  if( (mysql_real_query(&loggingDB, queryText.c_str(), queryText.length())))
-    {
-      logDbError("Error during BandModeList query");
-      return(0);
-    }
-  res=mysql_store_result(&loggingDB); 	/* Download result from server */
-  numRows=mysql_num_rows(res);
-  for(i=0; i < numRows; i++)
-    {
-      row=mysql_fetch_row(res); 		/* Get a row from the results */
-      bandModeText= row[0];
-      list.push_back(bandModeText);
-    }
-  mysql_free_result(res);
-  logger->logData("BandMode List Complete", LOGMESSAGES);
+	list.push_back('2m cw');
+	list.push_back('2m digital');
+	list.push_back('2m voice');
+	list.push_back('6m cw');
+	list.push_back('6m digital');
+	list.push_back('6m voice');
+	list.push_back('10m cw');
+	list.push_back('10m digital');
+	list.push_back('10m voice');
+	list.push_back('15m cw');
+	list.push_back('15m digital');
+	list.push_back('15m voice');
+	list.push_back('20m cw');
+	list.push_back('20m digital');
+	list.push_back('20m voice');
+	list.push_back('40m cw');
+	list.push_back('40m digital');
+	list.push_back('40m voice');
+	list.push_back('80m cw');
+	list.push_back('80m digital');
+	list.push_back('80m voice');
+	list.push_back('160m cw');
+	list.push_back('160m digital');
+	list.push_back('160m voice');
+//  MYSQL_RES *res; 		// To be used to fetch information into 
+//  MYSQL_ROW row;
+//  std::string bandModeText;
+//  int i, numRows;
+//
+//  logger->logData("Filling BandMode List", LOGMESSAGES);
+//
+//  std::string queryText;
+//  queryText="Select Title from BandMode";
+//  logger->logData("BandModeList Query->" + queryText + "<-", LOGSQL);
+//
+//  if( (mysql_real_query(&loggingDB, queryText.c_str(), queryText.length())))
+//    {
+//      logDbError("Error during BandModeList query");
+//      return(0);
+//    }
+//  res=mysql_store_result(&loggingDB); 	/* Download result from server */
+//  numRows=mysql_num_rows(res);
+//  for(i=0; i < numRows; i++)
+//    {
+//      row=mysql_fetch_row(res); 		/* Get a row from the results */
+//      bandModeText= row[0];
+//      list.push_back(bandModeText);
+//    }
+//  mysql_free_result(res);
+//  logger->logData("BandMode List Complete", LOGMESSAGES);
   return 1;
 }
 
