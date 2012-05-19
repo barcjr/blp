@@ -188,33 +188,40 @@ bool dataAccessMan::getPartialCalls(std::vector<std::string>& list, std::string 
 
 bool dataAccessMan::getPartialSections(std::vector<std::string>& list, std::string partialSection)
 {
-  MYSQL_RES *res; 		// To be used to fetch information into 
-  MYSQL_ROW row;
-  std::string partialSectionText;
-  int i, numRows;
+  curl_easy_setopt(easyhandle, CURLOPT_HTTPGET, 1L);
+  curl_easy_setopt(curl, CURLOPT_URL, ApiUrl+'/sections?partial='+partialSection);
+  // Setup callback to deal with returned data
 
-  logger->logData("Filling Partial Section List", LOGMESSAGES);
+  curl_easy_perform(curl); /* post away! */
+  curl_easy_reset();
 
-  std::string queryText;
-  queryText="Select Abbr, FullName from Section where (Abbr) like \'" + partialSection + "%\' OR (FullName) like \'" + partialSection + "%\'";
-  logger->logData("Partial Section List Query->" + queryText + "<-", LOGSQL);
-
-  if( (mysql_real_query(&loggingDB, queryText.c_str(), queryText.length())))
-    {
-      logDbError("Error during Partial Section List query");
-      return(0);
-    }
-  res=mysql_store_result(&loggingDB); 	/* Download result from server */
-  numRows=mysql_num_rows(res);
-  for(i=0; i < numRows; i++)
-    {
-      row=mysql_fetch_row(res); 		/* Get a row from the results */
-      partialSectionText= row[0];
-      partialSectionText.append(" ");
-      partialSectionText.append(row[1]);
-      list.push_back(partialSectionText);
-    }
-  mysql_free_result(res);
+//  MYSQL_RES *res; 		// To be used to fetch information into 
+//  MYSQL_ROW row;
+//  std::string partialSectionText;
+//  int i, numRows;
+//
+//  logger->logData("Filling Partial Section List", LOGMESSAGES);
+//
+//  std::string queryText;
+//  queryText="Select Abbr, FullName from Section where (Abbr) like \'" + partialSection + "%\' OR (FullName) like \'" + partialSection + "%\'";
+//  logger->logData("Partial Section List Query->" + queryText + "<-", LOGSQL);
+//
+//  if( (mysql_real_query(&loggingDB, queryText.c_str(), queryText.length())))
+//    {
+//      logDbError("Error during Partial Section List query");
+//      return(0);
+//    }
+//  res=mysql_store_result(&loggingDB); 	/* Download result from server */
+//  numRows=mysql_num_rows(res);
+//  for(i=0; i < numRows; i++)
+//    {
+//      row=mysql_fetch_row(res); 		/* Get a row from the results */
+//      partialSectionText= row[0];
+//      partialSectionText.append(" ");
+//      partialSectionText.append(row[1]);
+//      list.push_back(partialSectionText);
+//    }
+//  mysql_free_result(res);
   logger->logData("Partial Section List Complete", LOGMESSAGES);
   return 1;
 }
