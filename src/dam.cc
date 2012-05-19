@@ -118,6 +118,7 @@ bool dataAccessMan::getPartialCalls(std::vector<std::string>& list, std::string 
   // Setup callback to deal with returned data
 
   curl_easy_perform(curl); /* post away! */
+  curl_easy_reset();
 
 //  MYSQL_RES *subRes; 		// To be used to fetch information into 
 //  MYSQL_RES *res;
@@ -236,6 +237,7 @@ int  dataAccessMan::getStation(std::string call,  radioStation *thisStation)
   // Setup callback to deal with returned data
 
   curl_easy_perform(curl); /* post away! */	
+  curl_easy_reset();
 	
 //  MYSQL_RES *res; 		// To be used to fetch information into 
 //  MYSQL_ROW row;
@@ -360,6 +362,7 @@ int dataAccessMan::saveQSO(contact *thisContact)
   // TODO: Setup callback for curl here
 
   curl_easy_perform(curl); /* post away! */
+  curl_easy_reset();
 
 //  queryText="Select StationID from Station where StationCall=\"" + thisContact->curStation.callSign + "\"";
 //  logger->logData("Initial QSO Station Query->" + queryText + "<-", LOGSQL);
