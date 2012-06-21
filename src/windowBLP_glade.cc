@@ -36,7 +36,6 @@
 #endif
 #include <gtkmmconfig.h>
 #if GTKMM_MAJOR_VERSION==2 && GTKMM_MINOR_VERSION>2
-#include <sigc++/compatibility.h>
 #define GMM_GTKMM_22_24(a,b) b
 #else //gtkmm 2.2
 #define GMM_GTKMM_22_24(a,b) a
@@ -411,28 +410,28 @@ windowBLP_glade::windowBLP_glade(
    statusbarBLP->show();
    vbox2->show();
    windowBLP->show();
-   new_operator->signal_activate().connect(SigC::slot(*this, &windowBLP_glade::on_new_operator_activate), false);
-   imagemenuitemQuit->signal_activate().connect(SigC::slot(*this, &windowBLP_glade::on_quit_activate), false);
-   qso->signal_activate().connect(SigC::slot(*this, &windowBLP_glade::on_qso_activate), false);
-   operator_name->signal_activate().connect(SigC::slot(*this, &windowBLP_glade::on_operator_name_activate), false);
-   station->signal_activate().connect(SigC::slot(*this, &windowBLP_glade::on_station_activate), false);
-   history->signal_activate().connect(SigC::slot(*this, &windowBLP_glade::on_history_activate), false);
-   score->signal_activate().connect(SigC::slot(*this, &windowBLP_glade::on_score_activate), false);
-   reports->signal_activate().connect(SigC::slot(*this, &windowBLP_glade::on_reports_activate), false);
-   help->signal_activate().connect(SigC::slot(*this, &windowBLP_glade::on_help_activate), false);
-   menuitemAbout->signal_activate().connect(SigC::slot(*this, &windowBLP_glade::on_about1_activate), false);
-   comboboxLogger->signal_changed().connect(SigC::slot(*this, &windowBLP_glade::on_comboboxLogger_changed), false);
-   comboboxBandMode->signal_changed().connect(SigC::slot(*this, &windowBLP_glade::on_comboboxBandMode_changed), false);
-   comboboxOperator->signal_changed().connect(SigC::slot(*this, &windowBLP_glade::on_comboboxOperator_changed), false);
-   entryCall->signal_changed().connect(SigC::slot(*this, &windowBLP_glade::on_entryCall_changed), false);
-   entryCall->signal_focus_out_event().connect(SigC::slot(*this, &windowBLP_glade::on_entryCall_focus_out_event), false);
-   entryConClass->signal_focus_out_event().connect(SigC::slot(*this, &windowBLP_glade::on_entryConClass_focus_out_event), false);
-   entrySection->signal_changed().connect(SigC::slot(*this, &windowBLP_glade::on_entrySection_changed), false);
-   entrySection->signal_focus_out_event().connect(SigC::slot(*this, &windowBLP_glade::on_entrySection_focus_out_event), false);
-   treeviewCalls->signal_row_activated().connect(SigC::slot(*this, &windowBLP_glade::on_treeviewCalls_row_activated), false);
-   treeviewSections->signal_row_activated().connect(SigC::slot(*this, &windowBLP_glade::on_treeviewSections_row_activated), false);
-   button1->signal_clicked().connect(SigC::slot(*this, &windowBLP_glade::on_ClearQSO), false);
-   buttonSaveQSO->signal_clicked().connect(SigC::slot(*this, &windowBLP_glade::on_SaveQSO), false);
+   new_operator->signal_activate().connect(sigc::slot(*this, &windowBLP_glade::on_new_operator_activate), false);
+   imagemenuitemQuit->signal_activate().connect(sigc::slot(*this, &windowBLP_glade::on_quit_activate), false);
+   qso->signal_activate().connect(sigc::slot(*this, &windowBLP_glade::on_qso_activate), false);
+   operator_name->signal_activate().connect(sigc::slot(*this, &windowBLP_glade::on_operator_name_activate), false);
+   station->signal_activate().connect(sigc::slot(*this, &windowBLP_glade::on_station_activate), false);
+   history->signal_activate().connect(sigc::slot(*this, &windowBLP_glade::on_history_activate), false);
+   score->signal_activate().connect(sigc::slot(*this, &windowBLP_glade::on_score_activate), false);
+   reports->signal_activate().connect(sigc::slot(*this, &windowBLP_glade::on_reports_activate), false);
+   help->signal_activate().connect(sigc::slot(*this, &windowBLP_glade::on_help_activate), false);
+   menuitemAbout->signal_activate().connect(sigc::slot(*this, &windowBLP_glade::on_about1_activate), false);
+   comboboxLogger->signal_changed().connect(sigc::slot(*this, &windowBLP_glade::on_comboboxLogger_changed), false);
+   comboboxBandMode->signal_changed().connect(sigc::slot(*this, &windowBLP_glade::on_comboboxBandMode_changed), false);
+   comboboxOperator->signal_changed().connect(sigc::slot(*this, &windowBLP_glade::on_comboboxOperator_changed), false);
+   entryCall->signal_changed().connect(sigc::slot(*this, &windowBLP_glade::on_entryCall_changed), false);
+   entryCall->signal_focus_out_event().connect(sigc::slot(*this, &windowBLP_glade::on_entryCall_focus_out_event), false);
+   entryConClass->signal_focus_out_event().connect(sigc::slot(*this, &windowBLP_glade::on_entryConClass_focus_out_event), false);
+   entrySection->signal_changed().connect(sigc::slot(*this, &windowBLP_glade::on_entrySection_changed), false);
+   entrySection->signal_focus_out_event().connect(sigc::slot(*this, &windowBLP_glade::on_entrySection_focus_out_event), false);
+   treeviewCalls->signal_row_activated().connect(sigc::slot(*this, &windowBLP_glade::on_treeviewCalls_row_activated), false);
+   treeviewSections->signal_row_activated().connect(sigc::slot(*this, &windowBLP_glade::on_treeviewSections_row_activated), false);
+   button1->signal_clicked().connect(sigc::slot(*this, &windowBLP_glade::on_ClearQSO), false);
+   buttonSaveQSO->signal_clicked().connect(sigc::slot(*this, &windowBLP_glade::on_SaveQSO), false);
 }
 
 windowBLP_glade::~windowBLP_glade()
